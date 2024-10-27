@@ -39,7 +39,7 @@ This is a brief description of the project.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/faizanali16/job-service.git
 cd job-service
 ```
 
