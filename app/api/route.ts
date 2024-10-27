@@ -53,3 +53,14 @@ export async function POST() {
   await redis.hset(`job:${job.id}`, "status", "pending");
   return NextResponse.json({ id: job.id }, { status: 201 });
 }
+
+export async function GET() {
+  const jobKeys = await redis.keys("job:*");
+  const jobs = await Promise.all(
+    jobKeys.map(async (key) => {
+      const jobData = await redis.hgetall(key);
+      return { id: key.split(":")[1], ...jobData };
+    })
+  );
+  return NextResponse.json(jobs, { status: 200 });
+}
